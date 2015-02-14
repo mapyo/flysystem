@@ -135,8 +135,8 @@ class FileTests extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly(2))
             ->method('has')
             ->withConsecutive(
-                ['file.txt'],
-                ['files/renamed.txt']
+                array('file.txt'),
+                array('files/renamed.txt')
             )
             ->willReturnOnConsecutiveCalls(true, false);
         $adapter
@@ -170,8 +170,8 @@ class FileTests extends \PHPUnit_Framework_TestCase
             ->expects($this->exactly(2))
             ->method('has')
             ->withConsecutive(
-                ['file.txt'],
-                ['files/copied.txt']
+                array('file.txt'),
+                array('files/copied.txt')
             )
             ->willReturnOnConsecutiveCalls(true, false);
         $adapter

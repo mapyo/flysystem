@@ -109,7 +109,7 @@ class LocalAdapterTests extends \PHPUnit_Framework_TestCase
         $temp = tmpfile();
         fwrite($temp, 'dummy');
         rewind($temp);
-        $adapter->writeStream('dir/file.txt', $temp, new Config(['visibility' => 'public']));
+        $adapter->writeStream('dir/file.txt', $temp, new Config(array('visibility' => 'public')));
         fclose($temp);
         $this->assertTrue($adapter->has('dir/file.txt'));
         $result = $adapter->read('dir/file.txt');
@@ -120,7 +120,7 @@ class LocalAdapterTests extends \PHPUnit_Framework_TestCase
     public function testListingNonexistingDirectory()
     {
         $result = $this->adapter->listContents('nonexisting/directory');
-        $this->assertEquals([], $result);
+        $this->assertEquals(array(), $result);
     }
 
     public function testUpdateStream()
@@ -145,7 +145,7 @@ class LocalAdapterTests extends \PHPUnit_Framework_TestCase
     public function testCopy()
     {
         $adapter = $this->adapter;
-        $adapter->write('file.ext', 'content', new Config(['visibility' => 'public']));
+        $adapter->write('file.ext', 'content', new Config(array('visibility' => 'public')));
         $this->assertTrue($adapter->copy('file.ext', 'new.ext'));
         $this->assertTrue($adapter->has('new.ext'));
         $adapter->delete('file.ext');

@@ -50,20 +50,20 @@ class NullAdapterTest extends PHPUnit_Framework_TestCase
 
     public function expectedFailsProvider()
     {
-        return [
-            ['read'],
-            ['update'],
-            ['read'],
-            ['rename'],
-            ['delete'],
-            ['listContents', []],
-            ['getMetadata'],
-            ['getSize'],
-            ['getMimetype'],
-            ['getTimestamp'],
-            ['getVisibility'],
-            ['deleteDir'],
-        ];
+        return array(
+            array('read'),
+            array('update'),
+            array('read'),
+            array('rename'),
+            array('delete'),
+            array('listContents', array()),
+            array('getMetadata'),
+            array('getSize'),
+            array('getMimetype'),
+            array('getTimestamp'),
+            array('getVisibility'),
+            array('deleteDir'),
+        );
     }
 
     /**
@@ -77,10 +77,10 @@ class NullAdapterTest extends PHPUnit_Framework_TestCase
 
     public function expectedArrayResultProvider()
     {
-        return [
-            ['write'],
-            ['setVisibility'],
-        ];
+        return array(
+            array('write'),
+            array('setVisibility'),
+        );
     }
 
     /**
@@ -89,12 +89,12 @@ class NullAdapterTest extends PHPUnit_Framework_TestCase
     public function testArrayResult($method)
     {
         $adapter = new NullAdapter();
-        $this->assertInternalType('array', $adapter->{$method}('one', tmpfile(), new Config(['visibility' => 'public'])));
+        $this->assertInternalType('array', $adapter->{$method}('one', tmpfile(), new Config(array('visibility' => 'public'))));
     }
 
     public function testArrayResultForCreateDir()
     {
         $adapter = new NullAdapter();
-        $this->assertInternalType('array', $adapter->createDir('one', new Config(['visibility' => 'public'])));
+        $this->assertInternalType('array', $adapter->createDir('one', new Config(array('visibility' => 'public'))));
     }
 }
