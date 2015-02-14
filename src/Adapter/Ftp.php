@@ -20,13 +20,13 @@ class Ftp extends AbstractFtpAdapter
     /**
      * @var array
      */
-    protected $configurable = [
+    protected $configurable = array(
         'host', 'port', 'username',
         'password', 'ssl', 'timeout',
         'root', 'permPrivate',
         'permPublic', 'passive',
         'transferMode',
-    ];
+    );
 
     /**
      * Set the transfer mode.
@@ -267,7 +267,7 @@ class Ftp extends AbstractFtpAdapter
             return false;
         }
 
-        return ['path' => $dirname];
+        return array('path' => $dirname);
     }
 
     /**
