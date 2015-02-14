@@ -22,11 +22,11 @@ class ListPathsTests extends ProphecyTestCase
     {
         $plugin = new ListPaths();
         $this->assertEquals('listPaths', $plugin->getMethod());
-        $this->filesystem->listContents('dirname', true)->willReturn([
-            ['path' => 'dirname/path.txt'],
-        ]);
+        $this->filesystem->listContents('dirname', true)->willReturn(array(
+            array('path' => 'dirname/path.txt'),
+        ));
         $plugin->setFilesystem($this->actualFilesystem);
         $output = $plugin->handle('dirname', true);
-        $this->assertEquals(['dirname/path.txt'], $output);
+        $this->assertEquals(array('dirname/path.txt'), $output);
     }
 }

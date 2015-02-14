@@ -13,9 +13,9 @@ class MountManagerTests extends PHPUnit_Framework_TestCase
     public function testConstructorInjection()
     {
         $mock = Mockery::mock('League\Flysystem\FilesystemInterface');
-        $manager = new MountManager([
+        $manager = new MountManager(array(
             'prefix' => $mock,
-        ]);
+        ));
         $this->assertEquals($mock, $manager->getFilesystem('prefix'));
     }
 
@@ -39,11 +39,11 @@ class MountManagerTests extends PHPUnit_Framework_TestCase
 
     public function invalidCallProvider()
     {
-        return [
-            [[], 'LogicException'],
-            [[false], 'InvalidArgumentException'],
-            [['path/without/protocol'], 'InvalidArgumentException'],
-        ];
+        return array(
+            array(array(), 'LogicException'),
+            array(array(false), 'InvalidArgumentException'),
+            array(array('path/without/protocol'), 'InvalidArgumentException'),
+        );
     }
 
     /**
@@ -123,10 +123,10 @@ class MountManagerTests extends PHPUnit_Framework_TestCase
     protected function mockFilesystem()
     {
         $mock = Mockery::mock('League\Flysystem\FilesystemInterface');
-        $mock->shouldReceive('listContents')->andReturn([
-           ['path' => 'path.txt', 'type' => 'file'],
-           ['path' => 'dirname/path.txt', 'type' => 'file'],
-        ]);
+        $mock->shouldReceive('listContents')->andReturn(array(
+           array('path' => 'path.txt', 'type' => 'file'),
+           array('path' => 'dirname/path.txt', 'type' => 'file'),
+        ));
 
         return $mock;
     }

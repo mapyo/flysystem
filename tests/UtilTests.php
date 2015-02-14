@@ -6,11 +6,11 @@ class UtilTests extends \PHPUnit_Framework_TestCase
 {
     public function testEmulateDirectories()
     {
-        $input = [
-            ['dirname' => '', 'filename' => 'dummy'],
-            ['dirname' => 'something', 'filename' => 'dummy'],
-            ['dirname' => 'something', 'path' => 'something/dirname', 'type' => 'dir'],
-        ];
+        $input = array(
+            array('dirname' => '', 'filename' => 'dummy'),
+            array('dirname' => 'something', 'filename' => 'dummy'),
+            array('dirname' => 'something', 'path' => 'something/dirname', 'type' => 'dir'),
+        );
         $output = Util::emulateDirectories($input);
         $this->assertCount(4, $output);
     }
@@ -23,10 +23,10 @@ class UtilTests extends \PHPUnit_Framework_TestCase
 
     public function mapProvider()
     {
-        return [
-            [['from.this' => 'value'], ['from.this' => 'to.this', 'other' => 'other'], ['to.this' => 'value']],
-            [['from.this' => 'value', 'no.mapping' => 'lost'], ['from.this' => 'to.this'], ['to.this' => 'value']],
-        ];
+        return array(
+            array(array('from.this' => 'value'), array('from.this' => 'to.this', 'other' => 'other'), array('to.this' => 'value')),
+            array(array('from.this' => 'value', 'no.mapping' => 'lost'), array('from.this' => 'to.this'), array('to.this' => 'value')),
+        );
     }
 
     /**
@@ -40,11 +40,11 @@ class UtilTests extends \PHPUnit_Framework_TestCase
 
     public function dirnameProvider()
     {
-        return [
-            ['filename.txt', ''],
-            ['dirname/filename.txt', 'dirname'],
-            ['dirname/subdir', 'dirname'],
-        ];
+        return array(
+            array('filename.txt', ''),
+            array('dirname/filename.txt', 'dirname'),
+            array('dirname/subdir', 'dirname'),
+        );
     }
 
     /**
@@ -58,7 +58,7 @@ class UtilTests extends \PHPUnit_Framework_TestCase
 
     public function testEnsureConfig()
     {
-        $this->assertInstanceOf('League\Flysystem\Config', Util::ensureConfig([]));
+        $this->assertInstanceOf('League\Flysystem\Config', Util::ensureConfig(array()));
         $this->assertInstanceOf('League\Flysystem\Config', Util::ensureConfig(null));
         $this->assertInstanceOf('League\Flysystem\Config', Util::ensureConfig(new Config()));
     }
@@ -73,11 +73,11 @@ class UtilTests extends \PHPUnit_Framework_TestCase
 
     public function invalidPathProvider()
     {
-        return [
-            ['something/../../../hehe'],
-            ['/something/../../..'],
-            ['..'],
-        ];
+        return array(
+            array('something/../../../hehe'),
+            array('/something/../../..'),
+            array('..'),
+        );
     }
 
     /**
@@ -91,17 +91,17 @@ class UtilTests extends \PHPUnit_Framework_TestCase
 
     public function pathProvider()
     {
-        return [
-            ['/dirname/', 'dirname'],
-            ['dirname/..', ''],
-            ['./dir/../././', ''],
-            ['00004869/files/other/10-75..stl', '00004869/files/other/10-75..stl'],
-            ['/dirname//subdir///subsubdir', 'dirname/subdir/subsubdir'],
-            ['\dirname\\\\subdir\\\\\\subsubdir', 'dirname\subdir\subsubdir'],
-            ['\\\\some\shared\\\\drive', 'some\shared\drive'],
-            ['C:\dirname\\\\subdir\\\\\\subsubdir', 'C:\dirname\subdir\subsubdir'],
-            ['C:\\\\dirname\subdir\\\\subsubdir', 'C:\dirname\subdir\subsubdir'],
-        ];
+        return array(
+            array('/dirname/', 'dirname'),
+            array('dirname/..', ''),
+            array('./dir/../././', ''),
+            array('00004869/files/other/10-75..stl', '00004869/files/other/10-75..stl'),
+            array('/dirname//subdir///subsubdir', 'dirname/subdir/subsubdir'),
+            array('\dirname\\\\subdir\\\\\\subsubdir', 'dirname\subdir\subsubdir'),
+            array('\\\\some\shared\\\\drive', 'some\shared\drive'),
+            array('C:\dirname\\\\subdir\\\\\\subsubdir', 'C:\dirname\subdir\subsubdir'),
+            array('C:\\\\dirname\subdir\\\\subsubdir', 'C:\dirname\subdir\subsubdir'),
+        );
     }
 
     /**
@@ -115,11 +115,11 @@ class UtilTests extends \PHPUnit_Framework_TestCase
 
     public function pathAndContentProvider()
     {
-        return [
-            ['/some/file.css', 'body { background: #000; } ', 'text/css'],
-            ['/some/file.txt', 'body { background: #000; } ', 'text/plain'],
-            ['/1x1', base64_decode('R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs='), 'image/gif'],
-        ];
+        return array(
+            array('/some/file.css', 'body { background: #000; } ', 'text/css'),
+            array('/some/file.txt', 'body { background: #000; } ', 'text/plain'),
+            array('/1x1', base64_decode('R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs='), 'image/gif'),
+        );
     }
 
     /**
